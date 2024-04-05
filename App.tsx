@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import PostList from "./src/screens/PostList";
+import {
+	SafeAreaProvider,
+	useSafeAreaInsets,
+} from "react-native-safe-area-context";
+import { View } from "react-native";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+function MainContent() {
+	const insets = useSafeAreaInsets();
+
+	return (
+		<View
+			style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
+			className="bg-black grow"
+		>
+			<StatusBar style="light" />
+
+			<PostList />
+		</View>
+	);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+	return (
+		<SafeAreaProvider>
+			<MainContent />
+		</SafeAreaProvider>
+	);
+}
